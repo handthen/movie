@@ -1,0 +1,11 @@
+
+.img-cover.data-v-30bfac88 {
+		width: 200rpx;
+		height: 250rpx;
+		vertical-align: middle;
+}
+.loadImg.data-v-30bfac88 {
+		width: 0;
+		height: 0;
+		vertical-align: middle;
+}

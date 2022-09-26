@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "pin-item": "../PinItem/PinItem"
+  }
+}

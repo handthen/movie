@@ -1,0 +1,1 @@
+<nav-bar wx:if="{{a}}" u-i="7e77830c-0" bind:__l="__l" u-p="{{a}}"></nav-bar><view><uni-list u-s="{{['d']}}" u-i="7e77830c-1" bind:__l="__l"><uni-list-item wx:if="{{b}}" u-i="7e77830c-2,7e77830c-1" bind:__l="__l" u-p="{{b}}"></uni-list-item><uni-list-item wx:if="{{c}}" u-i="7e77830c-3,7e77830c-1" bind:__l="__l" u-p="{{c}}"></uni-list-item></uni-list></view>

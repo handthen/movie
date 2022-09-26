@@ -1,0 +1,7 @@
+
+.box.data-v-4eff1298{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding-top: 300rpx;
+}

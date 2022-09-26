@@ -1,0 +1,1 @@
+<view class="data-v-30bfac88" bindtap="{{g}}"><image wx:if="{{a}}" class="img-cover data-v-30bfac88" src="{{b}}" mode="aspectFill"/><image class="{{['data-v-30bfac88', c && 'img-cover', d && 'loadImg']}}" catchload="{{e}}" src="{{f}}" mode="aspectFill"/></view>

@@ -1,0 +1,1 @@
+<nav-bar wx:if="{{a}}" class="data-v-4eff1298" u-i="4eff1298-0" bind:__l="__l" u-p="{{a}}"></nav-bar><view class="box data-v-4eff1298"><text class="data-v-4eff1298">网络异常</text></view>

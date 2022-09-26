@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "nav-bar": "../../components/NavBar/NavBar",
+    "swper-movie": "../../components/swperMovie/swperMovie",
+    "model": "../../components/model/model",
+    "msg-pin": "../../components/Lemsg/Lemsg",
+    "pin-item": "../../components/PinItem/PinItem"
+  }
+}

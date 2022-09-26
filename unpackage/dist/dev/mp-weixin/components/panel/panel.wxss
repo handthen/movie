@@ -1,0 +1,32 @@
+
+.panel.data-v-a32f2864 {
+		position: absolute;
+		width: 700rpx;
+		min-height: 200rpx;
+		background-color: #fff;
+		padding-top: 15rpx;
+		padding: 0 25rpx;
+}
+.title.data-v-a32f2864{
+		display: flex;
+		justify-content: space-between;
+}
+.pan_title.data-v-a32f2864 {
+		color: #ababab;
+		font-size: 30rpx
+}
+.item.data-v-a32f2864 {
+		font-size: 30rpx;
+		background-color: #d3d3d3;
+		border-radius: 20rpx;
+		padding: 8rpx;
+		margin: 15rpx 10rpx;
+		color: #646464;
+}
+.black.data-v-a32f2864 {
+		background-color: rgb(0, 0, 0, 0.5);
+		position: absolute;
+		z-index: 10;
+		width: 750rpx;
+		height: 100vh;
+}

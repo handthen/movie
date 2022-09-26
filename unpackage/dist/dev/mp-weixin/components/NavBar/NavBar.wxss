@@ -1,0 +1,25 @@
+
+.titleBar.data-v-6e9cc378 {
+		width: 750rpx;
+		position: -webkit-sticky;
+		position: sticky;
+		z-index: 10000;
+		top: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: #fff;
+}
+.title.data-v-6e9cc378{
+		text-align: center;
+}
+.bar_left.data-v-6e9cc378{
+		position: absolute;
+		left: 30rpx;
+}
+.icon-danjiantouzuo.data-v-6e9cc378{
+		padding-right:30rpx;
+		padding-top: 10rpx;
+		padding-bottom: 10rpx;
+		display: inline-block;
+}

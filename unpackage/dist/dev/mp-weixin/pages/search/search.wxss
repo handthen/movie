@@ -1,0 +1,94 @@
+
+.search.data-v-4cedc0c6{
+		position: -webkit-sticky;
+		position: sticky;
+		z-index: 1000;
+		width: 750rpx;
+		margin-top: 20rpx;
+		padding-bottom: 20rpx;
+		background-color: #fff;
+}
+.icon-sousuo.data-v-4cedc0c6{
+		position: absolute;
+		left:55rpx;
+		top: 10rpx;
+		color: red;
+}
+.search_list.data-v-4cedc0c6 {
+		background-color: #fff;
+		width: 750rpx;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+}
+.search_list .loading.data-v-4cedc0c6 {
+		border: none;
+		font-size: 35rpx;
+		transform: translate(0,300rpx);
+}
+.search_con.data-v-4cedc0c6 {
+		width: 750rpx;
+		background-color: #fff;
+}
+.search_con .search.data-v-4cedc0c6 {
+		display: flex;
+		justify-content: space-evenly;
+		align-items: center;
+}
+.search_con .search-input.data-v-4cedc0c6 {
+		background-color: white;
+		width: 600rpx;
+		border-radius: 20rpx;
+		border: 1px solid red;
+		height: 10rpx;
+		margin: auto;
+		font-size: 30rpx;
+		padding-left: 80rpx;
+}
+.search_con .icon-sousuo.data-v-4cedc0c6 {
+		left: 40rpx;
+}
+.list_item.data-v-4cedc0c6 {
+		display: flex;
+		margin: 15rpx 25rpx;
+		height: 250rpx;
+}
+.item_img.data-v-4cedc0c6,
+	.img.data-v-4cedc0c6 {
+		width: 200rpx;
+		height: 250rpx;
+}
+.item_text.data-v-4cedc0c6 {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		margin: 0 20rpx;
+		overflow: hidden;
+}
+.item_jianjie.data-v-4cedc0c6 {
+		display: flex;
+		flex-direction: column;
+		font-size: 30rpx;
+}
+.list_item .play_btn.data-v-4cedc0c6 {
+		width: 200rpx;
+		height: 55rpx;
+		background-image: linear-gradient(to right,#ff0000,#ff8317);
+		margin: 0;
+		padding: 0;
+		font-size: 30rpx;
+		color: #fff;
+		line-height: 55rpx;
+}
+.text.data-v-4cedc0c6 {
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow: hidden;
+		width: 700rpx;
+}
+.empty.data-v-4cedc0c6{
+		text-align: center;
+		transform: translate(0,300rpx);
+}
+

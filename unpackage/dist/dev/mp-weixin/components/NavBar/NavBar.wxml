@@ -1,0 +1,1 @@
+<view style="{{'height:' + d + ';' + ('padding-top:' + e)}}" class="titleBar data-v-6e9cc378"><view wx:if="{{a}}" class="bar_left data-v-6e9cc378" bindtap="{{b}}"><text class="iconfont icon-danjiantouzuo data-v-6e9cc378"></text></view><view class="bar_cen data-v-6e9cc378"><text class="title data-v-6e9cc378">{{c}}</text></view><slot></slot></view>

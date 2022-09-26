@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "影视",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "nav-bar": "../../components/NavBar/NavBar",
+    "swper-movie": "../../components/swperMovie/swperMovie",
+    "panel": "../../components/panel/panel"
+  }
+}

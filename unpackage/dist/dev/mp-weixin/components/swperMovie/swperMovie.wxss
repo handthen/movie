@@ -1,0 +1,37 @@
+
+.img-cover.data-v-1ba47938{
+		width: 200rpx;
+		height: 250rpx;
+}
+.loadImg.data-v-1ba47938{
+		width: 0;
+		height: 0;
+}
+.body-movie.data-v-1ba47938{
+		display: flex;
+		flex-direction: column;
+		width: 200rpx;
+		margin-right: 20rpx;
+}
+.con-body.data-v-1ba47938{
+		height: 300rpx;
+		margin: 20rpx 0;
+		display: flex;
+		flex-direction: row;
+}
+.movie-name.data-v-1ba47938{
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		font-weight: 400;
+		font-size: 35rpx;
+}
+.con-top.data-v-1ba47938{
+		display: flex;
+		justify-content: space-between;
+}
+.icon-jiantouyou.data-v-1ba47938{
+		font-weight: 700;
+		color: #a3a3a3;
+		padding-left: 30rpx;
+}

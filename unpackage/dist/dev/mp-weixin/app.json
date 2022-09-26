@@ -1,0 +1,61 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/classif/classif",
+    "pages/me/me",
+    "pages/palyMovie/palyMovie",
+    "components/swperMovie/swperMovie",
+    "components/searchList/searchList",
+    "components/NavBar/NavBar",
+    "pages/collection/collection",
+    "pages/Error/Error",
+    "components/Image/Image",
+    "pages/historyList/historyList",
+    "components/loading/loading",
+    "pages/feedback/feedback",
+    "pages/download/download",
+    "pages/search/search",
+    "components/model/model",
+    "hooks/useModel/useModel",
+    "pages/setting/setting",
+    "components/panel/panel",
+    "components/Lemsg/Lemsg",
+    "components/MsgPin/MsgPin",
+    "components/PinItem/PinItem"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8",
+    "navigationStyle": "custom"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "static/tabBar/home.png",
+        "selectedIconPath": "static/tabBar/homeA.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/classif/classif",
+        "iconPath": "static/tabBar/fenlei.png",
+        "selectedIconPath": "static/tabBar/fenleiA.png",
+        "text": "分类"
+      },
+      {
+        "pagePath": "pages/me/me",
+        "iconPath": "static/tabBar/me.png",
+        "selectedIconPath": "static/tabBar/meA.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "usingComponents": {
+    "nav-bar": "/components/NavBar/NavBar",
+    "image-load": "/components/ImageLoad/ImageLoad",
+    "loading": "/components/loading/loading"
+  },
+  "sitemapLocation": "sitemap.json"
+}

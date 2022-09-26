@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "",
+  "usingComponents": {
+    "nav-bar": "../../components/NavBar/NavBar",
+    "image-load": "../../components/ImageLoad/ImageLoad"
+  }
+}

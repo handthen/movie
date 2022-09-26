@@ -1,0 +1,1 @@
+<nav-bar wx:if="{{a}}" u-i="c03e36ec-0" bind:__l="__l" u-p="{{a}}"></nav-bar><view class="uni-textarea"><block wx:if="{{r0}}"><textarea class="textarea" placeholder="请描述遇到的问题" value="{{b}}" bindinput="{{c}}"/></block><button class="btn" bindtap="{{d}}">提交</button></view>
