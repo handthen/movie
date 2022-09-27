@@ -5,7 +5,7 @@
 		<video class="myVideo" id="video" :src="currentUrl" @error="videoErrorCallback" enable-danmu danmu-btn controls
 			show-loading :title="movie.vod_name" :poster="movie.vod_pic" :autoplay="true" :danmu-list="danmuList"
 			enable-play-gesture="true" @timeupdate="currentTime" @ended="nextVideo" :play-strategy="2" :show-casting-button='true'
-			enable-auto-rotation="true" show-screen-lock-button="true" :initial-time="currTime"></video>
+		   show-screen-lock-button="true" :initial-time="currTime"></video>
 	</view>
 	<view class="body">
 		<view class="tagTitle">
@@ -66,16 +66,19 @@
 				</view>
 				<SwperMovie title="其他" :tid="movie.type_id" :back="false" />
 			</view>
-			<view v-show="active==1" class="comments" :style="{height:overHeight+'px'}">
-				<view v-for="item in pinlunList" :key="item._id">
-						<PinItem :item="item" />
-						<MsgPin  :item="item" :listHight="overHeight"/>
-				</view>
+			<view v-show="active==1"  class="comments">
+				<scroll-view @scrolltolower="onBottom" lower-threshold="40" scroll-y="true" v-if="pinlunList.length!=0" :style="{height:overHeight+'px'}">
+					<template v-for="item in pinlunList" :key="item._id">
+							<PinItem :item="item" :refPan="$repPanel"/>
+					</template>
+				</scroll-view>
 				<view class="" style="text-align: center;">
 					<text v-show="pinlunList.length==0&&threshold.loading==false" style="color: #cccccc;">暂无评论</text>
 					<Loading v-show="threshold.loading" />
 				</view>
+				<MsgPin :listHight="overHeight" ref="$repPanel"/>
 			</view>
+		
 		</view>
 		<view class="input" :style="{bottom:height+'px'}">
 			<input type="text" class="text" v-model="text" :placeholder="placeholder"
@@ -101,6 +104,7 @@ import Model from "@/components/model/model.vue";
 import MsgPin from "@/components/Lemsg/Lemsg.vue"
 import PinItem from "@/components/PinItem/PinItem.vue"
 const $model = ref(null)
+const $repPanel =ref(null)
 const { user,navBarHight} = storeToRefs(Pinia())
 const movie = ref({})
 const currentUrl = ref("")
@@ -177,7 +181,7 @@ onShareAppMessage((res) => {
 	}
 })
 
-onReachBottom(() => {
+ function onBottom(){
 	if (active != 1 || threshold.isEnd) return
 	get(movie.value.vod_id, true)
 		.then(res => {
@@ -186,7 +190,7 @@ onReachBottom(() => {
 			}
 			pinlunList.value.push(...res)
 		})
-})
+}
 
 function repUser(_id,name){
 	placeholder.value= "回复"+name
@@ -491,6 +495,6 @@ function videoErrorCallback(e) {
 	overflow: auto;
 }
 .comments{
-	overflow: auto;
+	/* overflow: auto; */
 }
 </style>

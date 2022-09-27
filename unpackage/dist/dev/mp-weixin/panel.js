@@ -17,6 +17,8 @@ const _sfc_main = {
     }
     function tapPanel(e) {
       let value = e.target.dataset.value;
+      if (!value)
+        return;
       common_vendor.index.navigateTo({
         url: "/pages/search/search?searchValue=" + value
       });

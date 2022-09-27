@@ -22,6 +22,7 @@ const PinItem = () => "../../components/PinItem/PinItem2.js";
 const _sfc_main = {
   setup(__props) {
     const $model = common_vendor.ref(null);
+    const $repPanel = common_vendor.ref(null);
     common_vendor.storeToRefs(store_index.Pinia());
     const movie = common_vendor.ref({});
     const currentUrl = common_vendor.ref("");
@@ -90,7 +91,7 @@ const _sfc_main = {
         imageUrl: movie.value.vod_pic
       };
     });
-    common_vendor.onReachBottom(() => {
+    function onBottom() {
       if (active != 1 || threshold.isEnd)
         return;
       get(movie.value.vod_id, true).then((res) => {
@@ -99,7 +100,7 @@ const _sfc_main = {
         }
         pinlunList.value.push(...res);
       });
-    });
+    }
     function repUser(_id, name) {
       placeholder.value = "\u56DE\u590D" + name;
       common_vendor.index._id = _id;
@@ -274,37 +275,43 @@ const _sfc_main = {
         }),
         P: active.value == 0,
         Q: overHeight.value + "px",
-        R: common_vendor.f(pinlunList.value, (item, k0, i0) => {
+        R: pinlunList.value.length != 0
+      }, pinlunList.value.length != 0 ? {
+        S: common_vendor.f(pinlunList.value, (item, k0, i0) => {
           return {
             a: "5dfbcc28-2-" + i0,
             b: common_vendor.p({
-              item
-            }),
-            c: "5dfbcc28-3-" + i0,
-            d: common_vendor.p({
               item,
-              listHight: overHeight.value
+              refPan: $repPanel.value
             }),
-            e: item._id
+            c: item._id
           };
         }),
-        S: pinlunList.value.length == 0 && common_vendor.unref(threshold).loading == false,
-        T: common_vendor.unref(threshold).loading,
-        U: active.value == 1,
-        V: overHeight.value + "px",
-        W: common_vendor.unref(threshold).isShow,
-        X: placeholder.value,
-        Y: common_vendor.o(focus),
-        Z: common_vendor.o(($event) => height.value = 0),
-        aa: placeholder.value.includes("\u56DE\u590D"),
-        ab: text.value,
-        ac: common_vendor.o(($event) => text.value = $event.detail.value),
-        ad: common_vendor.o(setPinlun),
-        ae: height.value + "px",
-        af: common_vendor.sr($model, "5dfbcc28-5", {
+        T: common_vendor.o(onBottom),
+        U: overHeight.value + "px"
+      } : {}, {
+        V: pinlunList.value.length == 0 && common_vendor.unref(threshold).loading == false,
+        W: common_vendor.unref(threshold).loading,
+        X: common_vendor.sr($repPanel, "5dfbcc28-4", {
+          "k": "$repPanel"
+        }),
+        Y: common_vendor.p({
+          listHight: overHeight.value
+        }),
+        Z: active.value == 1,
+        aa: common_vendor.unref(threshold).isShow,
+        ab: placeholder.value,
+        ac: common_vendor.o(focus),
+        ad: common_vendor.o(($event) => height.value = 0),
+        ae: placeholder.value.includes("\u56DE\u590D"),
+        af: text.value,
+        ag: common_vendor.o(($event) => text.value = $event.detail.value),
+        ah: common_vendor.o(setPinlun),
+        ai: height.value + "px",
+        aj: common_vendor.sr($model, "5dfbcc28-5", {
           "k": "$model"
         }),
-        ag: common_vendor.p({
+        ak: common_vendor.p({
           title: "\u53CD\u9988\u4FE1\u606F"
         })
       });

@@ -1,27 +1,18 @@
 <template>
-	<view class="box" v-if="item.reply?.length!=0" @tap.self="infoList">
-		<view class="">
-			<text>{{item.reply[0].username}} </text>
-			<text >{{item.reply[0].text}}</text>
-		</view>
-		<text>共{{item.reply.length}}条回复 ></text>
-	</view>
 	<view class="showInfoRep" v-if="showPanel" :style="{top:top+'rpx'}">
-		<view class="rep_body">
 			<view class="head">
 				<text style="font-size: 35rpx;">评论详情</text>
 				<text @tap="hideRep">x</text>
 			</view>
-			<view class="cont" :style="{height:listHight+'px'}">
-				<PinItem :item="item" :showRep="false" />
+			<scroll-view class="cont" scroll-y="true" @scrolltolower="onBottom" lower-threshold="40"  :style="{height:listHight+'px'}">
+				<PinItem :item="item"  :showRep="false"/>
 				<view class="body">
-					<text class="b_textTit">共{{item.reply.length}}条回复</text>
+					<text class="b_textTit">共{{item.reply?.length}}条回复</text>
 					<template v-for="(rep,index) in item.reply" :key="index">
-						<PinItem :item="rep" />
+						<PinItem :item="rep" :showRep="false"/>
 					</template>
 				</view>
-			</view>
-		</view>
+			</scroll-view>
 	</view>
 </template>
 
@@ -30,32 +21,35 @@
 		ref,
 		inject,
 		nextTick,
+		reactive
 	} from "vue"
 	import PinItem from "@/components/PinItem/PinItem.vue"
 	import Pinia from "@/store/index.js"
 	const pinia = Pinia()
-	const top = ref(1500)
 	const showPanel = ref(false)
+	const item = ref({})
+	const repList = ref([])
+	const top = ref(1500)
+	const page =  ref(10)
 	const props = defineProps({
-		item: {
-			type: Object,
-			default: {}
-		},
 		listHight:{
 			type:Number,
 			default:0
-		}
+		},
 	})
-		
-    const  repUser =inject("repUser")
-	function infoList() {
+	defineExpose({
+		infoList,
+		hideRep
+	})
+	function infoList(obj) {
+		item.value = obj;
+		repList.value = item.value.reply?.slice(0,page.value)
 		showPanel.value = true
 		nextTick(()=>{
 			top.value= 0
 		})
 		
 	}
-
 	function hideRep() {
 		top.value= 1500
 		nextTick(()=>{
@@ -63,19 +57,15 @@
 		})
 		
 	}
+	function onBottom(){
+		let arr = item.value.reply?.slice(page.value,page.value+10)
+		if(arr.length==0)return
+		repList.value.push(...arr)
+		page.value= page.value +10
+	}
 </script>
 
 <style scoped>
-	.box {
-		background-color: #e7e7e7;
-		border-radius: 20rpx;
-		width: 100%;
-		padding: 15rpx;
-		box-sizing: border-box;
-		margin-top: 15rpx;
-		margin-left: 64rpx;
-		font-size: 30rpx;
-	}
 
 	.showInfoRep {
 		position: absolute;
@@ -101,7 +91,6 @@
 		padding: 0 25rpx;
 	}
 	.cont{
-		overflow-y: auto;
 		margin: 0 25rpx;
 		margin-top: 10rpx;
 	}

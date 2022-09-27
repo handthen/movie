@@ -147,5 +147,5 @@
 	overflow: auto;
 }
 .comments.data-v-5dfbcc28{
-	overflow: auto;
+	/* overflow: auto; */
 }

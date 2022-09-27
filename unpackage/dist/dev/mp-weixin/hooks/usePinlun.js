@@ -10,7 +10,6 @@ function usePinlun() {
   async function getPinlunList(vod_id, next = false) {
     next && page.pg++;
     const { data, code } = await common_vendor.index.$cloud("getCommentList", { vod_id, pg: page.pg, limit: page.limit });
-    console.log("\u8BC4\u8BBA\u5217\u8868", data);
     if (code != 200)
       return [];
     return data;

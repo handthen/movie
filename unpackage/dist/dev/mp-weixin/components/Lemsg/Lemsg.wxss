@@ -1,14 +1,4 @@
 
-.box.data-v-5f453154 {
-		background-color: #e7e7e7;
-		border-radius: 20rpx;
-		width: 100%;
-		padding: 15rpx;
-		box-sizing: border-box;
-		margin-top: 15rpx;
-		margin-left: 64rpx;
-		font-size: 30rpx;
-}
 .showInfoRep.data-v-5f453154 {
 		position: absolute;
 		width: 750rpx;
@@ -30,7 +20,6 @@
 		padding: 0 25rpx;
 }
 .cont.data-v-5f453154{
-		overflow-y: auto;
 		margin: 0 25rpx;
 		margin-top: 10rpx;
 }

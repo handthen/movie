@@ -33,6 +33,7 @@
 	}
 	function tapPanel(e) {
 		let value = e.target.dataset.value;
+		if(!value)return
 		uni.navigateTo({
 			url: "/pages/search/search?searchValue=" + value
 		})

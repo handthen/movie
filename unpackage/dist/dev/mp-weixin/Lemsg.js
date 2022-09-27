@@ -7,21 +7,26 @@ if (!Math) {
 const PinItem = () => "./components/PinItem/PinItem2.js";
 const _sfc_main = {
   props: {
-    item: {
-      type: Object,
-      default: {}
-    },
     listHight: {
       type: Number,
       default: 0
     }
   },
-  setup(__props) {
+  setup(__props, { expose }) {
     store_index.Pinia();
-    const top = common_vendor.ref(1500);
     const showPanel = common_vendor.ref(false);
-    common_vendor.inject("repUser");
-    function infoList() {
+    const item = common_vendor.ref({});
+    const repList = common_vendor.ref([]);
+    const top = common_vendor.ref(1500);
+    const page = common_vendor.ref(10);
+    expose({
+      infoList,
+      hideRep
+    });
+    function infoList(obj) {
+      var _a;
+      item.value = obj;
+      repList.value = (_a = item.value.reply) == null ? void 0 : _a.slice(0, page.value);
       showPanel.value = true;
       common_vendor.nextTick(() => {
         top.value = 0;
@@ -33,35 +38,38 @@ const _sfc_main = {
         showPanel.value = false;
       });
     }
+    function onBottom() {
+      var _a;
+      let arr = (_a = item.value.reply) == null ? void 0 : _a.slice(page.value, page.value + 10);
+      if (arr.length == 0)
+        return;
+      repList.value.push(...arr);
+      page.value = page.value + 10;
+    }
     return (_ctx, _cache) => {
-      var _a, _b;
+      var _a;
       return common_vendor.e({
-        a: ((_a = __props.item.reply) == null ? void 0 : _a.length) != 0
-      }, ((_b = __props.item.reply) == null ? void 0 : _b.length) != 0 ? {
-        b: common_vendor.t(__props.item.reply[0].username),
-        c: common_vendor.t(__props.item.reply[0].text),
-        d: common_vendor.t(__props.item.reply.length),
-        e: common_vendor.o(infoList)
-      } : {}, {
-        f: showPanel.value
+        a: showPanel.value
       }, showPanel.value ? {
-        g: common_vendor.o(hideRep),
-        h: common_vendor.p({
-          item: __props.item,
+        b: common_vendor.o(hideRep),
+        c: common_vendor.p({
+          item: item.value,
           showRep: false
         }),
-        i: common_vendor.t(__props.item.reply.length),
-        j: common_vendor.f(__props.item.reply, (rep, index, i0) => {
+        d: common_vendor.t((_a = item.value.reply) == null ? void 0 : _a.length),
+        e: common_vendor.f(item.value.reply, (rep, index, i0) => {
           return {
             a: "5f453154-1-" + i0,
             b: common_vendor.p({
-              item: rep
+              item: rep,
+              showRep: false
             }),
             c: index
           };
         }),
-        k: __props.listHight + "px",
-        l: top.value + "rpx"
+        f: common_vendor.o(onBottom),
+        g: __props.listHight + "px",
+        h: top.value + "rpx"
       } : {});
     };
   }

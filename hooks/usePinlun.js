@@ -9,7 +9,6 @@ export default function usePinlun(){
 	async function getPinlunList(vod_id,next=false){
 		next&&page.pg++
 		const {data,code} =await uni.$cloud("getCommentList",{vod_id,pg:page.pg,limit:page.limit});
-		console.log("评论列表",data)
 		if(code!=200)return []
 		return data
 	}
