@@ -3,13 +3,17 @@
 		<!-- <ImageLoad :src="item.avatar" class='pin_img'></ImageLoad> -->
 		<image :src="item.avatar" class='pin_img'></image>
 		<view class="pin_right">
-			<text class="username">{{item.username}}</text>
+			<view class="pinListRep" v-if="!showRep">
+				<text class="username">{{item.username}}</text>
+				<text class="iconfont icon-xiaoxi" @tap.stop="replyUser(item._id,item.username)"></text>
+			</view>
+			 <text class="username" v-else>{{item.username}}</text>
 			<text class="pin_time">{{formatTime(item.time)}}</text>
 			<text class="pin_text" user-select>{{item.text}}</text>
 			<view class="pin_lemsg">
-				<text class="iconfont icon-dianzan"></text>
-				<text style="font-size: 30rpx;">{{item.give||0}}</text>
-				<text class="iconfont icon-xiaoxi" @tap.stop="replyUser(item._id,item.username)"></text>
+				<text class="iconfont icon-dianzan" v-if="showRep" :class="{dianzanAc:isGive}" @tap="dianzan(item._id)"></text>
+				<text style="font-size: 30rpx;vertical-align: middle;" v-if="showRep">{{dianzanLen||0}}</text>
+				<text class="iconfont icon-xiaoxi" v-if="showRep" @tap.stop="repUser(item._id,item.username)"></text>
 			</view>
 			<view class="box" v-if="item?.reply?.length>0&&showRep" @tap.stop="show">
 				<view class="">
@@ -27,10 +31,15 @@
 		formatTime
 	} from "@/uilts/getMovieCount.js"
 	import MsgPin from "@/components/Lemsg/Lemsg.vue"
+	import Pinia from "@/store/index.js"
 	import {
 		getCurrentInstance,
-		inject
+		inject,
+		computed,
+		ref
 	} from "vue"
+	const pinia = Pinia()
+	const dianzanLen = ref(0)
 	const props = defineProps({
 		item: {
 			type: Object,
@@ -45,20 +54,35 @@
 			default: {}
 		}
 	})
+	let isGive = computed(()=>{
+		let arr = props.item.give;
+		return arr.some(v=>v.openid==pinia.user.openid)
+	})
+	 dianzanLen.value = props.item.give?.length||0
 	const repUser = inject("repUser")
 	function show(){
 		console.log(props.refPan)
 		props.refPan.infoList(props.item)
 	}
-	function replyUser(_id, username) {
-		repUser(_id, username)
+	async function dianzan(_id){
+		const {code,state} = await uni.$cloud("signDianzan",{_id})
+		isGive = !!state
+		if(isGive){
+			 ++dianzanLen.value
+		}else{
+			 dianzanLen.value<=0?0:(--dianzanLen.value)
+		}
 	}
 </script>
 
 <style scoped>
 	.pin_item {
 		display: flex;
+		/* width: 710rpx; */
 		margin-bottom: 15rpx;
+	}
+	.dianzanAc{
+		color: red;
 	}
 
 	.pin_img {
@@ -76,7 +100,7 @@
 		flex: 1;
 		display: flex;
 		flex-direction: column;
-		margin-left: 20rpx;
+		margin-left:20rpx;
 	}
 
 	.icon-xiaoxi {
@@ -112,5 +136,9 @@
 		box-sizing: border-box;
 		margin-top: 15rpx;
 		font-size: 30rpx;
+	}
+	.pinListRep{
+		display: flex;
+		justify-content: space-between;
 	}
 </style>

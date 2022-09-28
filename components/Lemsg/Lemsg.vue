@@ -75,6 +75,7 @@
 		z-index: 8;
 		left: 0;
 		transition: all 0.5s;
+		box-sizing: border-box;
 	}
 
 	.rep_body {
@@ -91,8 +92,9 @@
 		padding: 0 25rpx;
 	}
 	.cont{
-		margin: 0 25rpx;
+		padding: 0 25rpx;
 		margin-top: 10rpx;
+		box-sizing: border-box;
 	}
 	.body{
 		/* padding-bottom: 130rpx; */

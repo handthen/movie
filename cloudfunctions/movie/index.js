@@ -20,7 +20,8 @@ const FTYPE = {
 	setbanmu,
 	clearHistory,
 	feedback,
-	setrepUser
+	setrepUser,
+	signDianzan
 }
 
 Object.freeze(FTYPE)
@@ -162,7 +163,7 @@ async function setHistory(event) {
 		if (!data) {
 			const result = await db.collection("movie_historical").add({
 				data: {
-					openid:userInfo.openId,
+					openid: userInfo.openId,
 					username,
 					movie,
 					time: Date.now(),
@@ -195,39 +196,48 @@ async function setHistory(event) {
 	}
 
 }
-async function getTohis(event){
-	const {vod_id,userInfo} =event ;
-	const {data,errMsg} = await db.collection('movie_historical').where({
-		openid:userInfo.openId,
-		vod_id
-	})
-	.field({
-		count:true,
-		movie_time:true
-	})
-	.get()
-	
+async function getTohis(event) {
+	const {
+		vod_id,
+		userInfo
+	} = event;
+	const {
+		data,
+		errMsg
+	} = await db.collection('movie_historical').where({
+			openid: userInfo.openId,
+			vod_id
+		})
+		.field({
+			count: true,
+			movie_time: true
+		})
+		.get()
+
 	return {
-		code:200,
+		code: 200,
 		data,
 		errMsg
 	}
-	
+
 }
 
-async function clearHistory(event){
-	const {userInfo,vod_id} = event
+async function clearHistory(event) {
+	const {
+		userInfo,
+		vod_id
+	} = event
 	let option = {}
-	vod_id&&(option.vod_id = vod_id)
+	vod_id && (option.vod_id = vod_id)
 	const data = await db.collection('movie_historical')
-	.where({
-	  openid:userInfo.openId,
-	  ...option
-	})
-	.remove()
-	
+		.where({
+			openid: userInfo.openId,
+			...option
+		})
+		.remove()
+
 	return {
-		code:200,
+		code: 200,
 	}
 }
 
@@ -297,7 +307,8 @@ async function setComments(event) {
 			time: Date.now(),
 			openid: userInfo.openId,
 			vod_id,
-			reply:[]
+			reply: [],
+			give:[]
 		}
 	})
 	return {
@@ -313,7 +324,7 @@ async function getCommentList(event) {
 	} = event;
 	const pageLimit = (pg - 1) * limit
 	try {
-		const list =await db.collection("movie_comments").where({
+		const list = await db.collection("movie_comments").where({
 				vod_id: vod_id
 			})
 			.orderBy('time', 'desc')
@@ -338,87 +349,167 @@ async function getCommentList(event) {
 	}
 }
 
-async function getbanmuList(event){
-	const {vod_id} = event;
-	const {data,errMsg} = await db.collection("movie_barrage").where({
-		vod_id:vod_id
-	})
-	.field({
-		banmuList:true
-	})
-	.get()
+async function getbanmuList(event) {
+	const {
+		vod_id
+	} = event;
+	const {
+		data,
+		errMsg
+	} = await db.collection("movie_barrage").where({
+			vod_id: vod_id
+		})
+		.field({
+			banmuList: true
+		})
+		.get()
 	return {
 		data,
 		errMsg
 	}
 }
 
-async function setbanmu(event){
-	const {userInfo,vod_id,banmu} = event;
+async function setbanmu(event) {
+	const {
+		userInfo,
+		vod_id,
+		banmu
+	} = event;
 	const _ = db.command
-	let result= {code:500}
-	const {data} = await db.collection("movie_barrage").where({
-		vod_id:+vod_id
+	let result = {
+		code: 500
+	}
+	const {
+		data
+	} = await db.collection("movie_barrage").where({
+		vod_id: +vod_id
 	}).get()
-	if(data.length==0){
-		 result = await db.collection("movie_barrage").add({
-			data:{
+	if (data.length == 0) {
+		result = await db.collection("movie_barrage").add({
+			data: {
 				vod_id,
-				banmuList:[{
+				banmuList: [{
 					...banmu,
-					openid:userInfo.openId
+					openid: userInfo.openId
 				}]
 			}
 		})
-		
-	}else{
-		 result = await db.collection("movie_barrage").where({
-			vod_id:+vod_id
+
+	} else {
+		result = await db.collection("movie_barrage").where({
+			vod_id: +vod_id
 		}).update({
-			data:{
-			banmuList:_.push({...banmu,openid:userInfo.openId})
-		}
+			data: {
+				banmuList: _.push({
+					...banmu,
+					openid: userInfo.openId
+				})
+			}
 		})
-		
+
 	}
-	return {code:200}
+	return {
+		code: 200
+	}
 }
 
 
-async function feedback(event){
-	const {userInfo,text} = event;
+async function feedback(event) {
+	const {
+		userInfo,
+		text
+	} = event;
 	const data = await db.collection("movie_feedback").add({
-		data:{
-			time:Date.now(),
+		data: {
+			time: Date.now(),
 			text,
-			openid:userInfo.openId
+			openid: userInfo.openId
 		}
 	})
-	
+
 	return {
-		code:200,
+		code: 200,
 		data
 	}
 }
 
-async function setrepUser(event){
-	const {_id,text,username,userInfo,avatar} = event;
+async function setrepUser(event) {
+	const {
+		_id,
+		text,
+		username,
+		userInfo,
+		avatar
+	} = event;
 	const _ = db.command
 	const data = await db.collection("movie_comments").doc(_id)
-	.update({
-		data:{
-			reply:_.push({
-				username,
-				text,
-				time:Date.now(),
-				openid:userInfo.openId,
-				avatar
-			})
-		}
-	})
-	
+		.update({
+			data: {
+				reply: _.push({
+					username,
+					text,
+					time: Date.now(),
+					openid: userInfo.openId,
+					avatar
+				})
+			}
+		})
+
 	return {
-		code:200,
+		code: 200,
 		data
 	}
+}
+
+async function signDianzan(event) {
+	const {
+		userInfo,
+		_id
+	} = event
+	const _ = db.command
+	let state = 0
+	try {
+		const {
+			data: {
+				give
+			}
+		} = await db.collection("movie_comments").doc(_id)
+			.field({
+				give: true
+			})
+			.get()
+		console.log("give", give)
+		const isGive = give.some(v => v.openid == userInfo.openId)
+		if (isGive) {
+			const data = await db.collection("movie_comments").doc(_id)
+				.update({
+					data: {
+						give: _.pull({
+							  openid: userInfo.openId
+							})
+					}
+				})
+		} else {
+			const data = await db.collection("movie_comments").doc(_id)
+				.update({
+					data: {
+						give: _.push({
+							openid: userInfo.openId,
+							time: Date.now(),
+						})
+					}
+				})
+				state = 1
+		}
+	} catch {
+		return {
+			code: 500
+		}
+	}
+
+	return {
+		code: 200,
+		state
+	}
+
 }

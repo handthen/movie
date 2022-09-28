@@ -1,7 +1,11 @@
 
 .pin_item.data-v-0b57bc56 {
 		display: flex;
+		/* width: 710rpx; */
 		margin-bottom: 15rpx;
+}
+.dianzanAc.data-v-0b57bc56{
+		color: red;
 }
 .pin_img.data-v-0b57bc56 {
 		width: 64rpx;
@@ -16,7 +20,7 @@
 		flex: 1;
 		display: flex;
 		flex-direction: column;
-		margin-left: 20rpx;
+		margin-left:20rpx;
 }
 .icon-xiaoxi.data-v-0b57bc56 {
 		margin-left: 80rpx;
@@ -45,4 +49,8 @@
 		box-sizing: border-box;
 		margin-top: 15rpx;
 		font-size: 30rpx;
+}
+.pinListRep.data-v-0b57bc56{
+		display: flex;
+		justify-content: space-between;
 }
